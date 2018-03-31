@@ -52,7 +52,11 @@ bool ffmpegOpen()
 {
 	if (s_initialized < 2)
 		return false;
+#if WIN32
 	s_proc = _popen(s_cmd.c_str(), "wb");
+#else
+	s_proc = popen(s_cmd.c_str(), "wb");
+#endif
 	return true;
 }
 void ffmpegClose()
@@ -60,7 +64,11 @@ void ffmpegClose()
 	ffmpegStop();
 	delete [] s_data;
 	s_data = 0;
+#if WIN32
 	_pclose(s_proc);
+#else
+	pclose(s_proc);
+#endif
 }
 
 void ffmpegUpdate()

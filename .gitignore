@@ -1,4 +1,8 @@
 
+/vendor/*
+!/vendor/patch
+!/vendor/CMakeLists.txt
+
 # Created by https://www.gitignore.io/api/visualstudio,c++,sublimetext
 
 ### VisualStudio ###

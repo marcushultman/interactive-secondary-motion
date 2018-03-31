@@ -272,7 +272,11 @@ static void initialize(GLFWwindow* window)
 	onFramebufferSizeChanged(window, width, height);
 
 	// Initialize AntTweakBar
+#if WIN32
 	TwInit(TW_OPENGL, NULL);
+#else
+	TwInit(TW_OPENGL_CORE, NULL);
+#endif
 	setupAntTweakBar();
 
 	// Init ffmpeg screen recording
