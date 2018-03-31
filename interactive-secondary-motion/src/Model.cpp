@@ -66,7 +66,7 @@ void Model::loadAnimation(const char* animationName)
 }
 
 void Model::resetAnimation(){
-	updateBoneTransforms(m_animationTime = 0, m_pScene->mRootNode, glm::mat4());
+	updateBoneTransforms(m_animationTime = 0, m_pScene->mRootNode, glm::mat4{1});
 	for (unsigned int i = 0; i < m_meshes.size(); i++){
 		m_meshes[i].reset(m_boneTransforms);
 	}
@@ -85,7 +85,7 @@ void Model::update(double elapsedTime)
 				m_animate = false;
 			}
 		}
-		updateBoneTransforms(m_animationTime, m_pScene->mRootNode, glm::mat4());
+		updateBoneTransforms(m_animationTime, m_pScene->mRootNode, glm::mat4{1});
 	}
 
 	for (unsigned int i = 0; i < m_meshes.size(); i++){
