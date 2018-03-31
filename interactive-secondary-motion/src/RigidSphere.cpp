@@ -60,7 +60,8 @@ void RigidSphere::draw(const glm::mat4 &view, const glm::mat4 &proj,
 	m_pShader->setProjectionMatrix(proj);
 
 	glBindVertexArray(m_VAO);
-	glDrawElements(GL_QUADS, m_numIndices, GL_UNSIGNED_INT, 0);
+	// todo: GL_QUADS deprecated and removed, update createMesh accordingly
+	glDrawElements(GL_TRIANGLES, m_numIndices, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 }
 
