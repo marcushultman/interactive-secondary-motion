@@ -127,9 +127,15 @@ static void onMouseDown(GLFWwindow* window, int button, int action, int mods)
 }
 static void onMouseMove(GLFWwindow* window, double xpos, double ypos)
 {
+	int window_width, window_height, buffer_width, buffer_height;
+	glfwGetWindowSize(window, &window_width, &window_height);
+	glfwGetFramebufferSize(window, &buffer_width, &buffer_height);
+
+	const auto mouse_position = glm::ivec2{
+		xpos * buffer_width / window_width, ypos * buffer_height / window_height};
+
 	// AntTweakBar event
-	if (TwEventMousePosGLFW(int(xpos), int(ypos)))
-		return;
+	TwEventMousePosGLFW(mouse_position.x, mouse_position.y);
 
 	glm::vec2 dpos(xpos - s_prevXPos, s_prevYPos - ypos);
 
