@@ -262,7 +262,7 @@ static void initialize(GLFWwindow* window)
 
 	// Set up framebuffer (and projection matrix)
 	int width, height;
-	glfwGetWindowSize(window, &width, &height);
+	glfwGetFramebufferSize(window, &width, &height);
 	onFramebufferSizeChanged(window, width, height);
 
 	// Initialize AntTweakBar
