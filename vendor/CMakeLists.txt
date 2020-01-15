@@ -43,6 +43,7 @@ ExternalProject_Add(assimp
   INSTALL_COMMAND ""
   BUILD_BYPRODUCTS <BINARY_DIR>/code/libassimp.dylib)
 ExternalProject_Get_Property(assimp SOURCE_DIR BINARY_DIR)
+set_target_properties(assimp PROPERTIES MACOSX_RPATH ON)
 set(ASSIMP_INCLUDE ${SOURCE_DIR}/include ${BINARY_DIR}/include PARENT_SCOPE)
 set(ASSIMP_LIB ${BINARY_DIR}/code/libassimp.dylib PARENT_SCOPE)
 
