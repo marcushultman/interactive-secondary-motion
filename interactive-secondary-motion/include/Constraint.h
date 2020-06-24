@@ -9,6 +9,8 @@
 class Constraint
 {
 public:
+  virtual ~Constraint() {}
+
 	virtual void projectConstraint(unsigned int solvIt, std::vector<glm::vec3> &p,
 		std::vector<glm::vec3> &s) const = 0;
 	
