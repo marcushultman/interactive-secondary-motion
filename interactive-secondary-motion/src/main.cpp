@@ -42,6 +42,8 @@
 #define FAR_PLANE 100.0f
 #define FOV 0.75f
 
+static std::unique_ptr<FFMPEGRecorder> s_ffmpeg;
+
 static Camera		s_camera;
 static glm::mat4	s_proj;
 
@@ -246,7 +248,7 @@ static void setupAntTweakBar()
 	TwAddVarRW(g_bar, "RENDER_DISTMAG", TW_TYPE_BOOL8, &g_twVar.render_distMag,
 		" group=RENDER label='Distortion magnitude' ");
 
-	TwAddVarRW(g_bar, "rec_record", TW_TYPE_BOOL8, ffmpegRec(),
+	TwAddVarRW(g_bar, "rec_record", TW_TYPE_BOOL8, s_ffmpeg->ffmpegRec(),
 		" group=RECORD label='Record' ");
 
 	TwAddSeparator(g_bar, "SEP3", 0);
@@ -272,6 +274,8 @@ static void initialize(GLFWwindow* window)
 	glfwGetFramebufferSize(window, &width, &height);
 	onFramebufferSizeChanged(window, width, height);
 
+  s_ffmpeg = std::make_unique<FFMPEGRecorder>();
+
 	// Initialize AntTweakBar
 #if WIN32
 	TwInit(TW_OPENGL, NULL);
@@ -281,9 +285,9 @@ static void initialize(GLFWwindow* window)
 	setupAntTweakBar();
 
 	// Init ffmpeg screen recording
-	ffmpegSetScreenSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-	ffmpegSetOutput("output.mp4");
-	ffmpegOpen();
+	s_ffmpeg->ffmpegSetScreenSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+	s_ffmpeg->ffmpegSetOutput("output.mp4");
+	s_ffmpeg->ffmpegOpen();
 
 
 	s_grid = new CoordGrid();
@@ -345,7 +349,7 @@ static void unload(GLFWwindow* window)
 
 	delete g_ball;
 
-	ffmpegClose();
+	s_ffmpeg.reset();
 }
 
 #pragma region Main Loop
@@ -383,7 +387,7 @@ void mainLoop(GLFWwindow* window)
 		draw(window);
 		glfwSwapBuffers(window);
 
-		ffmpegUpdate();
+		s_ffmpeg->ffmpegUpdate();
 	}
 }
 
