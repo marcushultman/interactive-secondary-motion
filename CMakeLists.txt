@@ -2,8 +2,11 @@ cmake_minimum_required(VERSION 3.9.2)
 
 project(interactive-secondary-motion)
 
-set(CMAKE_BUILD_TYPE "Release")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -O3 -w -Wextra") # -Wall
+
+find_package(OpenGL REQUIRED)
+find_package(GLEW REQUIRED)
+find_package(glfw3 REQUIRED)
 
 set(INCLUDE_DIR interactive-secondary-motion/include)
 set(SOURCE_DIR interactive-secondary-motion/src)
@@ -38,16 +41,19 @@ add_executable(interactive-secondary-motion ${SOURCES})
 add_subdirectory(vendor)
 
 include_directories(
-  ${GLEW_INCLUDE}
+  ${OPENGL_INCLUDE_DIRS}
+  ${GLEW_INCLUDE_DIRS}
   ${GLFW_INCLUDE}
   ${GLM_INCLUDE}
   ${ASSIMP_INCLUDE}
   ${ANTTWEAKBAR_INCLUDE})
 
-target_link_libraries(interactive-secondary-motion
-  ${GLEW_LIB}
-  ${GLFW_LIB}
-  ${ASSIMP_LIB}
+target_link_libraries(
+  interactive-secondary-motion
+  ${OPENGL_LIBRARIES}
+  /usr/local/lib/libGLEW.a
+  glfw
+  /usr/local/lib/libassimp.dylib
   ${ANTTWEAKBAR_LIB})
 
 if(APPLE)
