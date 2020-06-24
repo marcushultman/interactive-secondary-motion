@@ -1,8 +1,8 @@
 #include "ModelViewProjectionShader.h"
 
 
-ModelViewProjectionShader::ModelViewProjectionShader(const GLchar* VSPath, const GLchar* FSPath)
-	: Shader(VSPath, FSPath)
+ModelViewProjectionShader::ModelViewProjectionShader(const std::string &VSPath, const std::string &FSPath)
+	: Shader(VSPath.c_str(), FSPath.c_str())
 {
 }
 

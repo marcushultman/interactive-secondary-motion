@@ -1,12 +1,15 @@
 #include "RigidSphere.h"
 
+#include "config.h"
 
 RigidSphere::RigidSphere()
 {
 	m_radius = 0.38f;
 	m_radius2 = m_radius * m_radius;
 	createMesh(m_radius, 18, 18);
-	m_pShader = new ModelViewProjectionShader("resource/shaders/ball.vert", "resource/shaders/ball.frag");
+	m_pShader = new ModelViewProjectionShader(
+    config::kResourcesDir + "/shaders/ball.vert",
+    config::kResourcesDir + "/shaders/ball.frag");
 	reset(false);
 }
 

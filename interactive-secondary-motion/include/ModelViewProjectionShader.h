@@ -3,6 +3,7 @@
 */
 #pragma once
 
+#include <string>
 #include "Shader.h"
 #include <GL/glew.h>
 #include <glm/glm.hpp>
@@ -11,7 +12,7 @@
 class ModelViewProjectionShader : public Shader
 {
 public:
-	ModelViewProjectionShader(const GLchar* VSPath, const GLchar* FSPath);
+	ModelViewProjectionShader(const std::string &VSPath, const std::string &FSPath);
 	~ModelViewProjectionShader();
 
 	void setModelMatrix(const glm::mat4&) const;

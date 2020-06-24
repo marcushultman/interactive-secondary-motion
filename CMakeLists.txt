@@ -8,12 +8,12 @@ find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(glfw3 REQUIRED)
 
+configure_file(
+  ${CMAKE_CURRENT_SOURCE_DIR}/interactive-secondary-motion/include/config.h.in
+  ${CMAKE_BINARY_DIR}/include/config.h)
+
 set(INCLUDE_DIR interactive-secondary-motion/include)
 set(SOURCE_DIR interactive-secondary-motion/src)
-
-install(DIRECTORY interactive-secondary-motion/resource/
-        DESTINATION ${CMAKE_BINARY_DIR}/resource
-        FILES_MATCHING PATTERN "*.dae"  PATTERN "*.frag" PATTERN "*.vert")
 
 include_directories(${INCLUDE_DIR})
 
@@ -46,7 +46,9 @@ include_directories(
   ${GLFW_INCLUDE}
   ${GLM_INCLUDE}
   ${ASSIMP_INCLUDE}
-  ${ANTTWEAKBAR_INCLUDE})
+  ${ANTTWEAKBAR_INCLUDE}
+  ${CMAKE_BINARY_DIR}/include
+)
 
 target_link_libraries(
   interactive-secondary-motion

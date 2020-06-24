@@ -1,12 +1,15 @@
 #include "CoordGrid.h"
 
+#include "config.h"
 
 CoordGrid::CoordGrid()
 {
 	m_size = 0.1f;
 	m_subDivisions = 10;
 	createGrid();
-	m_pShader = new ModelViewProjectionShader("resource/shaders/grid.vert", "resource/shaders/grid.frag");
+	m_pShader = new ModelViewProjectionShader(
+    config::kResourcesDir + "/shaders/grid.vert",
+    config::kResourcesDir + "/shaders/grid.frag");
 }
 
 

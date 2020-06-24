@@ -25,7 +25,7 @@
 class Model
 {
 public:
-	Model(const char* file);
+	Model(const std::string &file);
 	~Model();
 
 	void loadAnimation(const char* animationName = 0);

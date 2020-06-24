@@ -1,15 +1,17 @@
 #include "Model.h"
 
 #include "TwVars.h"
+#include "config.h"
+
 extern TwVars g_twVar;
 
 extern RigidSphere *g_ball;
 
 
-Model::Model(const char* file)
+Model::Model(const std::string &file)
 {
 	// Load model data and meshes
-	if (!loadModel(file))
+	if (!loadModel(file.c_str()))
 		return;
 
 	// Load animation data, setup bone data for the loaded meshes
@@ -17,7 +19,8 @@ Model::Model(const char* file)
 
 	// Load shader
 	m_pShader = new ModelViewProjectionShader(
-		"resource/shaders/simple.vert", "resource/shaders/simple.frag");
+		config::kResourcesDir + "/shaders/simple.vert",
+    config::kResourcesDir + "/shaders/simple.frag");
 
 	// Set light properties
 	glUseProgram(m_pShader->getProgram());

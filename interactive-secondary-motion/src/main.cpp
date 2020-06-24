@@ -31,6 +31,7 @@
 #include "Model.h"
 #include "CoordGrid.h"
 #include "RigidSphere.h"
+#include "config.h"
 
 #pragma region Fields
 
@@ -289,18 +290,18 @@ static void initialize(GLFWwindow* window)
 	g_ball = new RigidSphere();
 
 	//N : 7366    M : 43776
-	s_model = new Model("resource/models/mesh1/head.dae");
+	s_model = new Model(config::kResourcesDir + "/models/mesh1/head.dae");
 	//N : 43922   M : 262656
-	//s_model = new Model("resource/models/mesh1/head2.dae");
+	//s_model = new Model(config::kResourcesDir + "/models/mesh1/head2.dae");
 	//N : 175402  M : 1050624
-	//s_model = new Model("resource/models/mesh1/head3.dae");
+	//s_model = new Model(config::kResourcesDir + "/models/mesh1/head3.dae");
 	
 	//N : 1902    M : 11094
-	//s_model = new Model("resource/models/mesh2/head.dae");
+	//s_model = new Model(config::kResourcesDir + "/models/mesh2/head.dae");
 	//N : 7514    M : 44412
-	//s_model = new Model("resource/models/mesh2/head2.dae");
+	//s_model = new Model(config::kResourcesDir + "/models/mesh2/head2.dae");
 	//N : 29838   M : 177648
-	//s_model = new Model("resource/models/mesh2/head3.dae");
+	//s_model = new Model(config::kResourcesDir + "/models/mesh2/head3.dae");
 
 	// Some rendering settings
 	glEnable(GL_DEPTH_TEST);
