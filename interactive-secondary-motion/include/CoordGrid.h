@@ -1,5 +1,5 @@
 /*
-* Copyright © 2015, Marcus Hultman
+* Copyright (c) 2015, Marcus Hultman
 */
 #pragma once
 

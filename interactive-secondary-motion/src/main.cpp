@@ -1,7 +1,7 @@
 /*
 *	Interactive Secondary Motion for Virtual Faces implementation.
 *
-* Copyright © 2015, Marcus Hultman
+* Copyright (c) 2015, Marcus Hultman
 */
 
 #include <stdio.h>
