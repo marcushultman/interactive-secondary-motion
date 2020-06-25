@@ -115,20 +115,26 @@ void RigidSphere::createMesh(float radius, unsigned int rings, unsigned int sect
 	float dy = (float) M_PI / (float) (rings - 1);
 	float x, y;
 
-	for (r = 0, y = 0; r < rings; r++, y += dy) for (s = 0, x = 0; s < sectors; s++, x += dx) {
-		float sy = sin(y);
-		*v = radius * glm::vec3(cos(x) * sy, cos(y), sin(x) * sy);
-		*n++ = glm::normalize(*v++);
-	}
+	for (r = 0, y = 0; r < rings; r++, y += dy) {
+    for (s = 0, x = 0; s < sectors; s++, x += dx) {
+      float sy = sin(y);
+      *v = radius * glm::vec3(cos(x) * sy, cos(y), sin(x) * sy);
+      *n++ = glm::normalize(*v++);
+    }
+  }
 
-	std::vector<unsigned int> indices(rings * sectors * 4);
+	std::vector<unsigned int> indices(rings * sectors * 6);
 	std::vector<unsigned int>::iterator i = indices.begin();
-	for (r = 0; r < rings - 1; r++) for (s = 0; s < sectors - 1; s++) {
-		*i++ = r * sectors + s;
-		*i++ = r * sectors + (s + 1);
-		*i++ = (r + 1) * sectors + (s + 1);
-		*i++ = (r + 1) * sectors + s;
-	}
+	for (r = 0; r < rings - 1; r++) {
+    for (s = 0; s < sectors - 1; s++) {
+      *i++ = r * sectors + s;
+      *i++ = r * sectors + (s + 1);
+      *i++ = (r + 1) * sectors + s;
+      *i++ = (r + 1) * sectors + s;
+      *i++ = r * sectors + (s + 1);
+      *i++ = (r + 1) * sectors + (s + 1);
+    }
+  }
 
 	GLintptr vertSize = sizeof(glm::vec3) * rings * sectors;
 	glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
