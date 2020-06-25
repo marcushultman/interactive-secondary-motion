@@ -13,7 +13,7 @@ find_package(glfw3 REQUIRED)
 add_subdirectory(vendor)
 
 configure_file(
-  ${CMAKE_CURRENT_SOURCE_DIR}/interactive-secondary-motion/include/config.h.in
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in
   ${CMAKE_BINARY_DIR}/include/config.h)
 
 set(FILES
@@ -28,7 +28,7 @@ set(FILES
 )
 
 foreach(f ${FILES})
-  list(APPEND SOURCES "interactive-secondary-motion/src/${f}")
+  list(APPEND SOURCES "src/${f}")
 endforeach()
 
 add_executable(interactive-secondary-motion ${SOURCES})
@@ -36,7 +36,7 @@ add_executable(interactive-secondary-motion ${SOURCES})
 target_include_directories(
   interactive-secondary-motion
   PUBLIC
-  ${CMAKE_CURRENT_SOURCE_DIR}/interactive-secondary-motion/include
+  ${CMAKE_CURRENT_SOURCE_DIR}/include
   ${CMAKE_BINARY_DIR}/include
   ${OPENGL_INCLUDE_DIRS}
   ${GLEW_INCLUDE_DIRS}
